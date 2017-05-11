@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UnderTheWeather.View.WeatherView"
+             xmlns:styles="clr-namespace:UnderTheWeather.StyleKits;assembly=UnderTheWeather"
+             xmlns:controls="clr-namespace:UnderTheWeather.Controls;assembly=UnderTheWeather"
+             Title="Weather">
+
+    <!--{x:Static styles:ColorStyleKit.PrimaryColor}"-->
+
+    <Grid Padding="0">
+        <Image x:Name="imgBackground"
+               Aspect="AspectFill"
+               Source=""
+               Grid.Row="0" Grid.Column="0"/>
+
+        <BoxView VerticalOptions="Fill"
+                 HorizontalOptions="Fill"
+                 BackgroundColor="{x:Static styles:ColorStyleKit.BackgroundAlpha}"/>
+
+        <StackLayout Padding="0" Spacing="0"
+                     Grid.Row="0" Grid.Column="0">
+            <StackLayout Padding="10" Spacing="20">
+                <Frame Padding="10"
+                       HasShadow="False"
+                       BackgroundColor="Transparent">
+                    <StackLayout Padding="0" Spacing="0">
+                        <!--User instruction lblHeader-->
+                        <Label x:Name="lblHeader"
+                               FontSize="Medium"
+                               TextColor="{x:Static styles:ColorStyleKit.IconsColor}"
+                               Text="Search any City in the world's current weather"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"/>
+                        <!--FontAttributes="Bold"-->
+                        <Entry Text="{Binding Location}"
+                               TextColor="{x:Static styles:ColorStyleKit.IconsColor}"
+                               PlaceholderColor="{x:Static styles:ColorStyleKit.IconsColor}">
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                             Binding="{Binding UseGPS}"
+                                             Value="true">
+                                    <Setter Property="IsEnabled" Value="false"/>
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                    </StackLayout>
+                </Frame>
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand"
+                         Spacing="20">
+                        <StackLayout Orientation="Horizontal"
+                         Spacing="10"
+                         HorizontalOptions="Start">
+                            <Label Text="Use GPS"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="{x:Static styles:ColorStyleKit.IconsColor}"/>
+                            <Switch IsToggled="{Binding UseGPS}"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                         Spacing="10"
+                         HorizontalOptions="End">
+                            <Label Text="Use Imperial"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="{x:Static styles:ColorStyleKit.IconsColor}"/>
+                            <Switch IsToggled="{Binding IsImperial}"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <Label x:Name="lblDate"                           
+                           Text="{Binding Date,
+                                  StringFormat='{0:dd MMM yyyy HH:mm:ss}'}"
+                           TextColor="{x:Static styles:ColorStyleKit.IconsColor}"
+                           FontSize="Large"
+                           HorizontalOptions="Center"/>
+
+                <controls:GradientButton  x:Name="btnGetWeather"
+                                          Text="Get Weather"
+                                          FontSize="Medium"
+                                          Command="{Binding GetWeatherCommand}"
+                                          Margin="0,10,0,10"
+                                          TextColor="{x:Static styles:ColorStyleKit.IconsColor}"
+                                          VerticalOptions="CenterAndExpand"
+                                          HorizontalOptions="FillAndExpand"
+                                          StartColor="{x:Static styles:ColorStyleKit.DefaultButtonStartColor}"
+                                          EndColor="{x:Static styles:ColorStyleKit.DefaultButtonEndColor}"
+                                          BackgroundColor="{x:Static styles:ColorStyleKit.PrimaryColor}"
+                                          BorderColor="{x:Static styles:ColorStyleKit.PrimaryTextColor}"
+                                          BorderRadius="10" />
+                
+                <!--<Button x:Name="btnGetWeather"
+                        Text="Get Weather"
+                        FontSize="Medium"
+                        Command="{Binding GetWeatherCommand}"
+                        Margin="0,10,0,10"/>-->
+                <Label Text="{Binding Temp}"
+                       TextColor="{x:Static styles:ColorStyleKit.IconsColor}"
+                       FontSize="30"
+                       HorizontalOptions="Center"/>
+                       <!--FontSize="Medium"-->
+                <Label x:Name="lblCondition"
+                       Text="{Binding Condition}"
+                       TextColor="{x:Static styles:ColorStyleKit.IconsColor}"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
+
+
+
+
+
+
+
+
+
